@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KTTM</title>
+    <script>
+        async function startGame() {
+            console.log(' KTTM ');
+            console.log();
+            console.log('数を合計してください');
+            const something = prompt('☆「Enter」キーでスタート');
+            console.log();
+
+            const N = 3;         // ループの回数
+            const numCount = 3;  // フラッシュ暗算で表示する数
+            let sum = 0;         // フラッシュ暗算の正しい答え
+
+            for (let i = 0; i < numCount; i++) {
+                document.getElementById('output').textContent = '';
+                const num = Math.floor(Math.random() * 19) - 9;
+                document.getElementById('output').textContent = num.toString();
+                await new Promise(resolve => setTimeout(resolve, 500));
+                document.getElementById('output').textContent = ' ';
+                await new Promise(resolve => setTimeout(resolve, 1000));
+                sum += num;
+            }
+
+            console.log();
+            const answer = prompt('あなたの答えを入力してください');
+            console.log();
+
+            if (parseInt(answer) === sum) {
+                document.getElementById('result').textContent = '⭕️ おめでとう！';
+            } else {
+                document.getElementById('result').textContent = '❌ 残念！・・・正解は ' + sum + ' です！';
+            }
+        }
+    </script>
+</head>
+<body>
+    <h1>KTTM</h1>
+    <button onclick="startGame()">ゲームスタート</button>
+    <p id="output"></p>
+    <p id="result"></p>
+</body>
+</html>
